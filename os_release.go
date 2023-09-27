@@ -30,6 +30,7 @@ const (
 	ReleaseDebian Release = "debian"
 	ReleaseAlpine Release = "alpine"
 	ReleaseCentOS Release = "centos"
+	ReleaseAmazon Release = "amzn"
 	ReleaseRHEL   Release = "rhel"
 	ReleaseKali   Release = "kali"
 )
@@ -47,6 +48,8 @@ func (r Release) Supported() bool {
 	case ReleaseAlpine:
 		return true
 	case ReleaseCentOS:
+		return true
+	case ReleaseAmazon:
 		return true
 	case ReleaseRHEL:
 		return false
@@ -78,6 +81,8 @@ func (r OSRelease) SupportsLUKS() bool {
 		// TODO: check version
 		return true
 	case ReleaseCentOS:
+		return true
+	case ReleaseAmazon:
 		return true
 	case ReleaseAlpine:
 		return true

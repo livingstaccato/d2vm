@@ -35,11 +35,16 @@ var alpineDockerfile string
 //go:embed templates/centos.Dockerfile
 var centOSDockerfile string
 
+//go:embed templates/amazon.Dockerfile
+var amazonDockerfile string
+
+
 var (
 	ubuntuDockerfileTemplate = template.Must(template.New("ubuntu.Dockerfile").Parse(ubuntuDockerfile))
 	debianDockerfileTemplate = template.Must(template.New("debian.Dockerfile").Parse(debianDockerfile))
 	alpineDockerfileTemplate = template.Must(template.New("alpine.Dockerfile").Parse(alpineDockerfile))
 	centOSDockerfileTemplate = template.Must(template.New("centos.Dockerfile").Parse(centOSDockerfile))
+	amazonDockerfileTemplate = template.Must(template.New("amazon.Dockerfile").Parse(amazonDockerfile))
 )
 
 type NetworkManager string
@@ -103,6 +108,12 @@ func NewDockerfile(release OSRelease, img, password string, networkManager Netwo
 		if networkManager != "" && networkManager != NetworkManagerNone {
 			return Dockerfile{}, fmt.Errorf("network manager is not supported on centos")
 		}
+    case ReleaseAmazon:
+        d.tmpl = amazonDockerfileTemplate
+        net = NetworkManagerNone
+        if networkManager != "" && networkManager != NetworkManagerNone {
+            return Dockerfile{}, fmt.Errorf("network manager is not supported on amazon")
+        }
 	default:
 		return Dockerfile{}, fmt.Errorf("unsupported distribution: %s", release.ID)
 	}

@@ -43,10 +43,15 @@ type grubCommon struct {
 }
 
 func newGrubCommon(c Config, r OSRelease) *grubCommon {
-	name := "grub"
-	if r.ID == "centos" {
-		name = "grub2"
-	}
+    name := "grub"
+
+    switch r.ID {
+    case ReleaseCentOS:
+	  name = "grub2"
+    case ReleaseAmazon:
+	  name = "grub2"
+    }
+
 	return &grubCommon{
 		name: name,
 		c:    c,

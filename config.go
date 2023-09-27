@@ -36,6 +36,10 @@ var (
 		Kernel: "/boot/vmlinuz",
 		Initrd: "/boot/initrd.img",
 	}
+	configAmazon = Config{
+		Kernel: "/boot/vmlinuz",
+		Initrd: "/boot/initrd.img",
+	}
 )
 
 type Root interface {
@@ -82,6 +86,8 @@ func (r OSRelease) Config() (Config, error) {
 		return configAlpine, nil
 	case ReleaseCentOS:
 		return configCentOS, nil
+	case ReleaseAmazon:
+		return configAmazon, nil
 	default:
 		return Config{}, fmt.Errorf("%s: distribution not supported", r.ID)
 
