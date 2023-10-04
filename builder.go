@@ -449,7 +449,7 @@ func (b *builder) cmdline(_ context.Context) string {
 	switch b.osRelease.ID {
 	case ReleaseAlpine:
 		return b.config.Cmdline(RootUUID(b.rootUUID), "root=/dev/mapper/root", "cryptdm=root", "cryptroot=UUID="+b.cryptUUID, b.cmdLineExtra)
-	case ReleaseCentOS:
+	case ReleaseCentOS, ReleaseAmazon:
 		return b.config.Cmdline(RootUUID(b.rootUUID), "rd.luks.name=UUID="+b.rootUUID+" rd.luks.uuid="+b.cryptUUID+" rd.luks.crypttab=0", b.cmdLineExtra)
 	default:
 		// for some versions of debian, the cryptopts parameter MUST contain all the following: target,source,key,opts...

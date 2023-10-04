@@ -1,0 +1,420 @@
+FROM {{ .Image }}
+
+USER root
+
+
+RUN dnf update -y
+
+RUN dnf install -y --allowerasing \
+acl \
+acpid \
+amazon-chrony-config \
+amazon-ec2-net-utils \
+amazon-linux-sb-keys \
+amazon-rpm-config \
+amazon-ssm-agent \
+at \
+attr \
+audit \
+aws-cfn-bootstrap \
+awscli-2 \
+bash-completion \
+bc \
+bind-libs \
+bind-license \
+bind-utils \
+binutils \
+boost-filesystem \
+boost-system \
+boost-thread \
+bzip2 \
+c-ares \
+checkpolicy \
+chkconfig \
+chrony \
+cloud-init \
+cloud-utils-growpart \
+coreutils \
+coreutils-common \
+cpio \
+cracklib \
+cracklib-dicts \
+crontabs \
+crypto-policies-scripts \
+cryptsetup \
+cryptsetup-libs \
+cyrus-sasl-lib \
+cyrus-sasl-plain \
+dbus \
+dbus-broker \
+dbus-common \
+dbus-libs \
+device-mapper \
+device-mapper-libs \
+diffutils \
+dnf-plugin-release-notification \
+dnf-plugin-support-info \
+dnf-plugins-core \
+dosfstools \
+dracut \
+dracut-config-ec2 \
+dracut-config-generic \
+dwz \
+dyninst \
+e2fsprogs \
+e2fsprogs-libs \
+ec2-hibinit-agent \
+ec2-instance-connect \
+ec2-instance-connect-selinux \
+ec2-utils \
+ed \
+efi-filesystem \
+efi-srpm-macros \
+efivar \
+efivar-libs \
+elfutils-debuginfod-client \
+ethtool \
+file \
+findutils \
+fonts-srpm-macros \
+fstrm \
+fuse-libs \
+gdisk \
+gettext \
+gettext-libs \
+ghc-srpm-macros \
+glibc-all-langpacks \
+glibc-gconv-extra \
+glibc-locale-source \
+gnutls \
+go-srpm-macros \
+gpm-libs \
+groff-base \
+{{- if .GrubBIOS }}
+    grub2 \
+{{- end }}
+{{- if .GrubEFI }}
+    grub2 grub2-efi-x64 grub2-efi-x64-modules grub2-efi-x64-ec2.x86_64 \
+{{- end }}
+grub2-common \
+grub2-efi-x64-ec2 \
+grub2-pc-modules \
+grub2-tools \
+grub2-tools-minimal \
+grubby \
+gssproxy \
+gzip \
+hostname \
+hunspell \
+hunspell-en \
+hunspell-en-GB \
+hunspell-en-US \
+hunspell-filesystem \
+hwdata \
+info \
+inih \
+initscripts \
+iproute \
+iputils \
+irqbalance \
+jansson \
+jitterentropy \
+jq \
+kbd \
+kbd-misc \
+kernel \
+kernel-livepatch-repo-s3 \
+kernel-srpm-macros \
+kernel-tools \
+keyutils \
+kmod \
+kmod-libs \
+kpatch-runtime \
+less \
+libaio \
+libargon2 \
+libbasicobjects \
+libcbor \
+libcollection \
+libconfig \
+libdb \
+libdhash \
+libeconf \
+libedit \
+libev \
+libevent \
+libfdisk \
+libfido2 \
+libibverbs \
+libini_config \
+libkcapi \
+libkcapi-hmaccalc \
+libldb \
+libmaxminddb \
+libmetalink \
+libmnl \
+libnfsidmap \
+libnl3 \
+libpath_utils \
+libpcap \
+libpipeline \
+libpkgconf \
+libpsl \
+libpwquality \
+libref_array \
+libseccomp \
+libselinux-utils \
+libsemanage \
+libss \
+libsss_certmap \
+libsss_idmap \
+libsss_nss_idmap \
+libstoragemgmt \
+libtalloc \
+libtdb \
+libtevent \
+libtextstyle \
+libtirpc \
+libuser \
+libutempter \
+libuv \
+libverto-libev \
+lm_sensors-libs \
+lmdb-libs \
+logrotate \
+lsof \
+lua-srpm-macros \
+man-db \
+man-pages \
+microcode_ctl \
+nano \
+ncurses \
+net-tools \
+nettle \
+newt \
+nfs-utils \
+nspr \
+nss \
+nss-softokn \
+nss-softokn-freebl \
+nss-sysinit \
+nss-util \
+ntsysv \
+numactl-libs \
+ocaml-srpm-macros \
+oniguruma \
+openblas-srpm-macros \
+openldap \
+openssh \
+openssh-clients \
+openssh-server \
+openssl \
+openssl-pkcs11 \
+os-prober \
+package-notes-srpm-macros \
+pam \
+parted \
+passwd \
+pciutils \
+pciutils-libs \
+perl-Carp \
+perl-Class-Struct \
+perl-DynaLoader \
+perl-Encode \
+perl-Errno \
+perl-Exporter \
+perl-Fcntl \
+perl-File-Basename \
+perl-File-Path \
+perl-File-Temp \
+perl-File-stat \
+perl-Getopt-Long \
+perl-Getopt-Std \
+perl-HTTP-Tiny \
+perl-IO \
+perl-IPC-Open3 \
+perl-MIME-Base64 \
+perl-POSIX \
+perl-PathTools \
+perl-Pod-Escapes \
+perl-Pod-Perldoc \
+perl-Pod-Simple \
+perl-Pod-Usage \
+perl-Scalar-List-Utils \
+perl-SelectSaver \
+perl-Socket \
+perl-Storable \
+perl-Symbol \
+perl-Term-ANSIColor \
+perl-Term-Cap \
+perl-Text-ParseWords \
+perl-Text-Tabs+Wrap \
+perl-Time-Local \
+perl-constant \
+perl-if \
+perl-interpreter \
+perl-libs \
+perl-mro \
+perl-overload \
+perl-overloading \
+perl-parent \
+perl-podlators \
+perl-srpm-macros \
+perl-subs \
+perl-vars \
+pkgconf \
+pkgconf-m4 \
+pkgconf-pkg-config \
+policycoreutils \
+policycoreutils-python-utils \
+procps-ng \
+protobuf-c \
+psacct \
+psmisc \
+publicsuffix-list-dafsa \
+python-chevron \
+python-srpm-macros \
+python3-attrs \
+python3-audit \
+python3-awscrt \
+python3-babel \
+python3-cffi \
+python3-chardet \
+python3-colorama \
+python3-configobj \
+python3-cryptography \
+python3-daemon \
+python3-dateutil \
+python3-dbus \
+python3-distro \
+python3-dnf-plugins-core \
+python3-docutils \
+python3-idna \
+python3-jinja2 \
+python3-jmespath \
+python3-jsonpatch \
+python3-jsonpointer \
+python3-jsonschema \
+python3-libselinux \
+python3-libsemanage \
+python3-libstoragemgmt \
+python3-lockfile \
+python3-markupsafe \
+python3-netifaces \
+python3-oauthlib \
+python3-ply \
+python3-policycoreutils \
+python3-prettytable \
+python3-prompt-toolkit \
+python3-pycparser \
+python3-pyrsistent \
+python3-pyserial \
+python3-pysocks \
+python3-pytz \
+python3-pyyaml \
+python3-requests \
+python3-ruamel-yaml \
+python3-ruamel-yaml-clib \
+python3-setools \
+python3-setuptools \
+python3-six \
+python3-urllib3 \
+python3-wcwidth \
+quota \
+quota-nls \
+rng-tools \
+rootfiles \
+rpcbind \
+rpm-plugin-selinux \
+rpm-plugin-systemd-inhibit \
+rsync \
+rust-srpm-macros \
+sbsigntools \
+screen \
+selinux-policy \
+selinux-policy-targeted \
+shadow-utils \
+slang \
+sssd-client \
+sssd-common \
+sssd-kcm \
+strace \
+sudo \
+sysctl-defaults \
+syslinux \
+syslinux-extlinux \
+sysstat \
+systemd \
+systemd-libs \
+systemd-networkd \
+systemd-pam \
+systemd-resolved \
+systemd-udev \
+systemtap-runtime \
+tar \
+tbb \
+tcpdump \
+tcsh \
+time \
+traceroute \
+unzip \
+update-motd \
+userspace-rcu \
+util-linux \
+util-linux-core \
+vim-common \
+vim-data \
+vim-enhanced \
+vim-filesystem \
+vim-minimal \
+wget \
+which \
+words \
+xfsdump \
+xfsprogs \
+xxd \
+xxhash-libs \
+xz \
+zip \
+zstd \
+    && \
+    systemctl unmask systemd-remount-fs.service && \
+    systemctl unmask getty.target && \
+    find /boot -type l -exec rm {} \;
+
+RUN sudo dnf remove -y \
+  kernel \
+  kernel-livepatch-repo-s3 \
+  kernel-tools \
+  pciutils \
+  pciutils-libs
+
+RUN sudo dnf install -y \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/k/kernel-6.2.9-300.fc38.x86_64.rpm \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/k/kernel-core-6.2.9-300.fc38.x86_64.rpm \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/k/kernel-headers-6.2.6-300.fc38.x86_64.rpm \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/k/kernel-modules-6.2.9-300.fc38.x86_64.rpm \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/k/kernel-modules-core-6.2.9-300.fc38.x86_64.rpm \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/k/kernel-tools-6.2.6-300.fc38.x86_64.rpm \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/k/kernel-tools-libs-6.2.6-300.fc38.x86_64.rpm \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/p/pciutils-3.9.0-3.fc38.x86_64.rpm \
+http://sjc.mirror.rackspace.com/fedora/releases/38/Everything/x86_64/os/Packages/p/pciutils-libs-3.9.0-3.fc38.x86_64.rpm
+
+RUN rpm -qa | grep kernel
+
+{{ if .Luks }}
+RUN dracut --no-hostonly --regenerate-all --force --install="/usr/sbin/cryptsetup"
+{{ else }}
+RUN dracut --no-hostonly --regenerate-all --force
+{{ end }}
+
+{{ if .Password }}RUN echo "root:{{ .Password }}" | chpasswd {{ end }}
+
+{{- if not .Grub }}
+RUN cd /boot && \
+        mv $(find . -name 'vmlinuz-*') /boot/vmlinuz && \
+        mv $(find . -name 'initramfs-*.img') /boot/initrd.img
+{{- end }}
+
+RUN dnf clean all && \
+    rm -rf /var/cache/dnf

@@ -25,11 +25,15 @@ import (
 	"go.linka.cloud/d2vm/pkg/exec"
 )
 
-const grubCfg = `GRUB_DEFAULT=0
+const grubCfg = `GRUB_CMDLINE_LINUX_DEFAULT="console=tty0 console=ttyS0,115200n8 nvme_core.io_timeout=4294967295 rd.emergency=poweroff rd.shell=0 selinux=0 text nomodeset"
 GRUB_TIMEOUT=10
-GRUB_CMDLINE_LINUX_DEFAULT="systemd.log_level=debug systemd.log_target=console %s"
+#GRUB_CMDLINE_LINUX_DEFAULT="%s"
 GRUB_CMDLINE_LINUX=""
 GRUB_TERMINAL=console
+GRUB_ENABLE_BLSCFG="true"
+GRUB_X86_USE_32BIT="true"
+GRUB_DEFAULT=saved
+GRUB_UPDATE_DEFAULT_KERNEL=true
 `
 
 type grubCommon struct {
